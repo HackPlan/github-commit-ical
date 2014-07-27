@@ -1,2 +1,1 @@
-github-commit-ical
-==================
+## github-commit-ical

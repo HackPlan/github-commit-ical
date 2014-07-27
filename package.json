@@ -1,0 +1,23 @@
+{
+    "name": "github-commit-ical",
+    "version": "0.1.0",
+    "description": "",
+    "homepage": "http://commit-calendar.newsbee.io/",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hackplan/github-commit-ical.git"
+    },
+    "contributors": [
+        {
+            "name": "jysperm",
+            "email": "jysperm@gmail.com",
+            "url": "http://jysperm.me"
+        }
+    ],
+    "dependencies": {
+        "express": "*",
+        "request": "*",
+        "ical-generator": "*"
+    }
+}
