@@ -16,8 +16,9 @@ html
 
     .body
       .container.clearfix
-        input#username(type="text", placeholder="Enter your GitHub username")
-        button(onclick="subscribe()") Subscribe to Calendar
+        form(onsubmit="subscribe()")
+          input#username(type="text", placeholder="Enter your GitHub username")
+          button(type="submit") Subscribe to Calendar
     .footer
       .container.copyright.clearfix
         .left
