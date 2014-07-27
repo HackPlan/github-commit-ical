@@ -1,1 +1,5 @@
-## github-commit-ical
+# github-commit-ical
+
+
+View your commit history in Calendar
+
