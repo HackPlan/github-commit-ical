@@ -27,7 +27,7 @@ app.use harp.mount(path.join(__dirname, 'static'))
 app.get '/:username', (req, res) ->
   username = req.param 'username'
 
-  sendRequest "/users/#{username}/events", (err, _res, body) ->
+  sendRequest "/users/#{username}/events?per_page=300", (err, _res, body) ->
     events = _.filter JSON.parse(body), (event) ->
       return event.type == 'PushEvent'
 
@@ -68,6 +68,9 @@ app.get '/:username', (req, res) ->
       for commits in result
         for commit in commits
           cal.addEvent commit
+
+      console.log "[Request by] #{username}"
+      console.log "[X-RateLimit-Remaining] #{_res.headers['x-ratelimit-remaining']}"
 
       res.header 'Content-Type', 'text/calendar; charset=utf-8'
       res.status(200).end(cal.toString())
