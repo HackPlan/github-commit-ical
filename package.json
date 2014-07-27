@@ -19,6 +19,8 @@
         "express": "*",
         "request": "*",
         "ical-generator": "*",
-        "harp": "*"
+        "harp": "*",
+        "async": "*",
+        "underscore": "*"
     }
 }
