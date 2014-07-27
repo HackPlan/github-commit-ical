@@ -2,7 +2,7 @@
     "name": "github-commit-ical",
     "version": "0.1.0",
     "description": "View your commit history in Calendar",
-    "homepage": "http://commit-calendar.newsbee.io",
+    "homepage": "http://commitcal.newsbee.io",
     "license": "MIT",
     "repository": {
         "type": "git",

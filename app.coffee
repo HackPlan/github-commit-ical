@@ -68,7 +68,7 @@ app.get '/:username', (req, res) ->
 
     , (err, result) ->
       cal = ical()
-      cal.setDomain('commit-calendar.newsbee.io').setName("#{username} Commit History")
+      cal.setDomain('commitcal.newsbee.io').setName("#{username} Commit History")
 
       for commits in result
         for commit in commits
