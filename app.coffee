@@ -44,16 +44,13 @@ app.get '/:username', (req, res) ->
 
           else
             sendRequest "/repos/#{event.repo.name}/git/commits/#{commit.sha}", (err, _res, body) ->
-              unless JSON.parse(body).committer.date
-                console.log JSON.parse(body)
-
-              real_time = JSON.parse(body).committer.date
+              body = JSON.parse body
 
               result =
-                start: new Date real_time
-                end: new Date real_time
+                start: new Date body.committer.date
+                end: new Date body.committer.date
                 summary: "#{commit.message} (#{event.repo.name})"
-                url: commit.html_url
+                url: body.html_url
 
               redis_client.set "github-commit-ical:#{commit.sha}", JSON.stringify(result), ->
                 callback err, result
