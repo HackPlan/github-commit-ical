@@ -18,6 +18,7 @@
     "dependencies": {
         "express": "*",
         "request": "*",
-        "ical-generator": "*"
+        "ical-generator": "*",
+        "harp": "*"
     }
 }

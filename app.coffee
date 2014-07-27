@@ -1,8 +1,12 @@
 express = require 'express'
 request = require 'request'
+harp = require 'harp'
+path = require 'path'
 ical = require 'ical-generator'
 
 app = express()
+
+app.use harp.mount(path.join(__dirname, 'static'))
 
 app.get '/:username', (req, res) ->
   username = req.param 'username'
@@ -14,7 +18,7 @@ app.get '/:username', (req, res) ->
     body = JSON.parse body
 
     cal = ical()
-    cal.setDomain('github-commit-ical').setName("#{username} Commit History");
+    cal.setDomain('commit-calendar.newsbee.io').setName("#{username} Commit History")
 
     for item in body
       if item.type == 'PushEvent'
