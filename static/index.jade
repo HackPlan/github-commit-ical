@@ -1,1 +1,34 @@
-p Hello World
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title commitCal
+    link(rel='icon', href='/favicon.png', type='image/png')
+    link(rel='stylesheet', href='/styles/index.css', type='text/css', media='screen')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+  body
+    .header
+      .container
+        h1.title.highlight commitCal
+        h3 View your commit history in Calendar
+        p.star
+          iframe(src="http://ghbtns.com/github-btn.html?user=HackPlan&repo=github-commit-ical&type=watch&size=large", allowtransparency="true", frameborder="0", scrolling="0", width="72", height="30")
+
+    .body
+      .container.clearfix
+        input#username(type="text", placeholder="Enter your GitHub username")
+        button(onclick="subscribe()") Subscribe to Calendar
+    .footer
+      .container.copyright.clearfix
+        .left
+          p &copy; HackPlan
+        .right
+          p A 
+            a(href="http://hackplan.com") Hackplan
+            |  Project
+
+    script.
+      function subscribe() {
+        username = document.getElementById('username').value;
+        window.open("webcal://commit-calendar.newsbee.io/" + username);
+      }
