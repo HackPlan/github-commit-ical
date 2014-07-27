@@ -2,23 +2,24 @@ doctype html
 html
   head
     meta(charset="utf-8")
-    title commitCal
+    title CommitCal
     link(rel='icon', href='/favicon.png', type='image/png')
     link(rel='stylesheet', href='/styles/index.css', type='text/css', media='screen')
     meta(name='viewport', content='width=device-width, initial-scale=1')
   body
     .header
       .container
-        h1.title.highlight commitCal
-        h3 View your commit history in Calendar
+        h1.title.highlight CommitCal
+        h3 View your commit history in calendar
         p.star
           iframe(src="http://ghbtns.com/github-btn.html?user=HackPlan&repo=github-commit-ical&type=watch&size=large", allowtransparency="true", frameborder="0", scrolling="0", width="72", height="30")
-
     .body
       .container.clearfix
-        form(onsubmit="subscribe()")
+        form.clearfix(onsubmit="return subscribe()")
           input#username(type="text", placeholder="Enter your GitHub username")
           button(type="submit") Subscribe to Calendar
+        #subscription.clearfix(style="display:none")
+          #subscription_url 
     .footer
       .container.copyright.clearfix
         .left
@@ -27,9 +28,21 @@ html
           p A 
             a(href="http://hackplan.com") Hackplan
             |  Project
-
     script.
       function subscribe() {
         username = document.getElementById('username').value;
-        window.open("webcal://commit-calendar.newsbee.io/" + username);
+        if (!username) {
+          return false;
+        }
+        url = "commit-calendar.newsbee.io/" + username;
+        if (window.navigator.platform.toUpperCase().indexOf('MAC') >= 0){
+          window.open("webcal://" + url);
+        }else{
+          link = document.getElementById('subscription_url')
+          link.innerHTML = "http://" + url;
+
+          subscription = document.getElementById('subscription')
+          subscription.style.display = "block";
+        }
+        return false;
       }

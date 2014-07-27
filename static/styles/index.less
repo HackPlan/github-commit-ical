@@ -102,7 +102,7 @@ input[type=text], input[type=password], textarea {
 }
 
 
-button{
+button, .button{
   display: inline-block;
   margin-bottom: 0;
   font-weight: bold;
@@ -126,12 +126,30 @@ button{
 }
 
 .container{
+  #subscription{
+    margin-top: 1em;
+    background: #5B9DD1;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    color: #fff;
+  }
+  #subscription_url{
+    line-height: 2em;
+    float: left;
+  }
+  #sub_link{
+    width: auto;
+    background: #2173B6;
+    border-color: #1E73B6;
+    padding: 3px 10px;
+  }
+
   input{
     width: 57%;
     float: left;
     box-sizing: border-box;
   }
-  button {
+  button, .button {
     width: 40%;
     float: right;
     box-sizing: border-box;
