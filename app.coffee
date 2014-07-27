@@ -28,7 +28,12 @@ app.get '/:username', (req, res) ->
   username = req.param 'username'
 
   sendRequest "/users/#{username}/events?per_page=300", (err, _res, body) ->
-    events = _.filter JSON.parse(body), (event) ->
+    body = JSON.parse body
+
+    unless _.isArray body
+      return res.status(404).end()
+
+    events = _.filter body, (event) ->
       return event.type == 'PushEvent'
 
     async.map events, (event, callback) ->
@@ -46,11 +51,14 @@ app.get '/:username', (req, res) ->
             sendRequest "/repos/#{event.repo.name}/git/commits/#{commit.sha}", (err, _res, body) ->
               body = JSON.parse body
 
-              result =
-                start: new Date body.committer.date
-                end: new Date body.committer.date
-                summary: "#{commit.message} (#{event.repo.name})"
-                url: body.html_url
+              if body.committer
+                result =
+                  start: new Date body.committer.date
+                  end: new Date body.committer.date
+                  summary: "#{commit.message} (#{event.repo.name})"
+                  url: body.html_url
+              else
+                result = {}
 
               redis_client.set "github-commit-ical:#{commit.sha}", JSON.stringify(result), ->
                 callback err, result
@@ -64,7 +72,8 @@ app.get '/:username', (req, res) ->
 
       for commits in result
         for commit in commits
-          cal.addEvent commit
+          if commit.summary
+            cal.addEvent commit
 
       console.log "[Request by] #{username}"
       console.log "[X-RateLimit-Remaining] #{_res.headers['x-ratelimit-remaining']}"

@@ -34,15 +34,18 @@ html
         if (!username) {
           return false;
         }
-        url = "commit-calendar.newsbee.io/" + username;
-        if (window.navigator.platform.toUpperCase().indexOf('MAC') >= 0){
-          window.open("webcal://" + url);
-        }else{
-          link = document.getElementById('subscription_url')
-          link.innerHTML = "http://" + url;
 
-          subscription = document.getElementById('subscription')
-          subscription.style.display = "block";
+        url = "commit-calendar.newsbee.io/" + username;
+
+        if (window.navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+          window.open("webcal://" + url);
         }
+
+        link = document.getElementById('subscription_url')
+        link.innerHTML = "http://" + url;
+
+        subscription = document.getElementById('subscription')
+        subscription.style.display = "block";
+
         return false;
       }
