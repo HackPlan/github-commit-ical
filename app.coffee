@@ -22,7 +22,8 @@ sendRequest = (path, callback) ->
 
 app = express()
 
-app.use harp.mount(path.join(__dirname, 'static'))
+app.use '/bower_components', express.static 'bower_components'
+app.use harp.mount 'static'
 
 app.get '/:username', (req, res) ->
   username = req.param 'username'
@@ -75,10 +76,9 @@ app.get '/:username', (req, res) ->
           if commit.summary
             cal.addEvent commit
 
-      console.log "[Request by] #{username}"
-      console.log "[X-RateLimit-Remaining] #{_res.headers['x-ratelimit-remaining']}"
+      console.log "Request by: #{username}, X-RateLimit-Remaining: #{_res.headers['x-ratelimit-remaining']}"
 
       res.header 'Content-Type', 'text/calendar; charset=utf-8'
       res.status(200).end(cal.toString())
 
-app.listen 3000
+app.listen 19864

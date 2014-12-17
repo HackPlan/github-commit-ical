@@ -12,10 +12,10 @@ html
         h1.title.highlight CommitCal
         h3 View your commit history in calendar
         p.star
-          iframe(src="http://ghbtns.com/github-btn.html?user=HackPlan&repo=github-commit-ical&type=watch&size=large", allowtransparency="true", frameborder="0", scrolling="0", width="72", height="30")
+          iframe(src="/github-btn.html?user=HackPlan&repo=github-commit-ical&type=watch&size=large", allowtransparency="true", frameborder="0", scrolling="0", width="72", height="30")
     .body
       .container.clearfix
-        form.clearfix(onsubmit="return subscribe()")
+        form.clearfix(onsubmit="subscribe()")
           input#username(type="text", placeholder="Enter your GitHub username")
           button(type="submit") Subscribe to Calendar
         #subscription.clearfix(style="display:none")
@@ -30,21 +30,22 @@ html
             |  Project
     script.
       function subscribe() {
-        username = document.getElementById('username').value;
+        var username = document.getElementById('username').value;
+
         if (!username) {
           return false;
         }
 
-        url = "commitcal.newsbee.io/" + username;
+        var url = "commitcal.newsbee.io/" + username;
 
         if (window.navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
           window.open("webcal://" + url);
         }
 
-        link = document.getElementById('subscription_url')
+        var link = document.getElementById('subscription_url')
         link.innerHTML = "http://" + url;
 
-        subscription = document.getElementById('subscription')
+        var subscription = document.getElementById('subscription')
         subscription.style.display = "block";
 
         return false;
