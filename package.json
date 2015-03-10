@@ -19,13 +19,14 @@
     "start": "./node_modules/.bin/coffee app.coffee"
   },
   "dependencies": {
+    "async": "^0.9.0",
     "coffee-script": "^1.7.1",
     "express": "^4.10.0",
-    "request": "^2.47.0",
-    "ical-generator": "^0.1.9",
     "harp": "^0.14.0",
-    "async": "^0.9.0",
-    "underscore": "^1.7.0",
-    "redis": "^0.12.1"
+    "ical-generator": "^0.1.9",
+    "raven": "^0.7.3",
+    "redis": "^0.12.1",
+    "request": "^2.47.0",
+    "underscore": "^1.7.0"
   }
 }

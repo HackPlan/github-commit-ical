@@ -5,9 +5,16 @@ harp = require 'harp'
 path = require 'path'
 ical = require 'ical-generator'
 redis = require 'redis'
+raven = require 'raven'
 _ = require 'underscore'
 
 config = require './config'
+
+if config.sentry != 'sentry-api-key'
+  sentry = new raven.Client config.sentry
+  sentry.patchGlobal()
+else
+  sentry = null
 
 redis_client = redis.createClient()
 
@@ -77,8 +84,12 @@ app.get '/:username', (req, res) ->
             cal.addEvent commit
 
       console.log "Request by: #{username}, X-RateLimit-Remaining: #{_res.headers['x-ratelimit-remaining']}"
+      sentry?.captureMessage username
 
       res.header 'Content-Type', 'text/calendar; charset=utf-8'
       res.status(200).end(cal.toString())
+
+if config.sentry != 'sentry-api-key'
+  app.use raven.middleware.express config.sentry
 
 app.listen 19864
